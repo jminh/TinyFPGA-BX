@@ -10,15 +10,18 @@ hardware.asc: hardware.pcf hardware.blif
 	arachne-pnr -d 8k -P cm81 -o hardware.asc -p hardware.pcf hardware.blif
 
 hardware.bin: hardware.asc
-	icetime -d hx8k -c 12 -mtr hardware.rpt hardware.asc
+	#icetime -d hx8k -c 12 -mtr hardware.rpt hardware.asc
+	icetime -C /Users/ming/.apio/packages/toolchain-icestorm/share/icebox/chipdb-8k.txt  -d hx8k -c 12 -mtr hardware.rpt hardware.asc
 	icepack hardware.asc hardware.bin
 
 
 firmware.elf: sections.lds start.S firmware.c 
-	riscv32-unknown-elf-gcc -march=rv32imc -nostartfiles -Wl,-Bstatic,-T,sections.lds,--strip-debug,-Map=firmware.map,--cref  -ffreestanding -nostdlib -o firmware.elf start.S firmware.c
+	#riscv32-unknown-elf-gcc -march=rv32imc -nostartfiles -Wl,-Bstatic,-T,sections.lds,--strip-debug,-Map=firmware.map,--cref  -ffreestanding -nostdlib -o firmware.elf start.S firmware.c
+	riscv64-unknown-elf-gcc -march=rv32imc -mabi=ilp32 -nostartfiles -Wl,-Bstatic,-T,sections.lds,--strip-debug,-Map=firmware.map,--cref  -ffreestanding -nostdlib -o firmware.elf start.S firmware.c
 
 firmware.bin: firmware.elf
-	riscv32-unknown-elf-objcopy -O binary firmware.elf /dev/stdout > firmware.bin
+	#riscv32-unknown-elf-objcopy -O binary firmware.elf /dev/stdout > firmware.bin
+	riscv64-unknown-elf-objcopy -O binary firmware.elf firmware.bin
 
 
 clean:

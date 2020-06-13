@@ -1,0 +1,26 @@
+
+* setup
+  
+#+BEGIN_SRC sh
+source ~/conda.sh
+source activate py3
+export PATH=/Users/ming/.apio/packages/toolchain-icestorm/bin:$PATH
+
+make
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+which tinyprog
+/Users/ming/miniconda2/envs/py3/bin/tinyprog
+#+END_EXAMPLE
+
+* misc
+
+#+BEGIN_EXAMPLE
+brew tap ucb-bar/riscv && brew install riscv-tools
+#+END_EXAMPLE 
+ 
+#+BEGIN_EXAMPLE
+brew list | grep riscv-tools
+riscv-tools
+#+END_EXAMPLE
