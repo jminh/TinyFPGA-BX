@@ -24,3 +24,11 @@ brew tap ucb-bar/riscv && brew install riscv-tools
 brew list | grep riscv-tools
 riscv-tools
 #+END_EXAMPLE
+
+Can't open chipdb file: No such file or directory
+/usr/local/share/icebox/chipdb-8k.txt
+
+Sol:
+
+  icetime -C /Users/ming/.apio/packages/toolchain-icestorm/share/icebox/chipdb-8k.txt  -d hx8k -c 12 -mtr hardware.rpt hardware.asc
+
