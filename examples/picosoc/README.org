@@ -14,6 +14,12 @@ which tinyprog
 /Users/ming/miniconda2/envs/py3/bin/tinyprog
 #+END_EXAMPLE
 
+* misc Building a pure RV32I Toolchain
+
+https://github.com/cliffordwolf/picorv32/blob/master/README.md#building-a-pure-rv32i-toolchain
+
+https://discourse.tinyfpga.com/t/riscv-example-project-on-tinyfpga-bx/451
+
 * misc
 
 #+BEGIN_EXAMPLE
