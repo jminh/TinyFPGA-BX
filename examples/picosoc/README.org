@@ -20,6 +20,13 @@ https://github.com/cliffordwolf/picorv32/blob/master/README.md#building-a-pure-r
 
 https://discourse.tinyfpga.com/t/riscv-example-project-on-tinyfpga-bx/451
 
+Side note:
+
+On MacBook Air (13-inch, Mid 2013),
+compile 32 bit toolchain takes
+287 min
+(make -j10) in ubuntu virtualbox.
+
 * misc
 
 #+BEGIN_EXAMPLE
