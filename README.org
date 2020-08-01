@@ -5,3 +5,36 @@ See how to set up dev environment
 
 
 See examples/picosoc/README.org
+
+* blink_project
+
+Copy the apio_template directory to a new directory and rename it blink_project.
+
+cd TinyFPGA-BX-master/blink_project
+apio upload
+
+#+BEGIN_EXAMPLE
+cat apio.ini
+[env]
+board = TinyFPGA-BX
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+$ apio upload
+[Sat Aug  1 20:36:13 2020] Processing TinyFPGA-BX
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+yosys -p "synth_ice40 -blif hardware.blif" -q top.v
+arachne-pnr -d 8k -P cm81 -p pins.pcf -o hardware.asc -q hardware.blif
+icepack hardware.asc hardware.bin
+tinyprog --libusb --program hardware.bin
+
+TinyProg CLI
+------------
+Using device id 1d50:6130
+Only one board with active bootloader, using it.
+Programming USB 20.2 with hardware.bin
+Programming at addr 028000
+Waking up SPI flash
+135100 bytes to program
+Success!
+#+END_EXAMPLE
