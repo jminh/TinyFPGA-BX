@@ -2,3 +2,6 @@
 https://tinyfpga.com/bx/guide.html
 
 See how to set up dev environment
+
+
+See examples/picosoc/README.org
