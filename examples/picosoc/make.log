@@ -1,0 +1,160 @@
+yosys -ql hardware.log -p 'synth_ice40 -top hardware -blif hardware.blif' hardware.v spimemio.v simpleuart.v picosoc.v picorv32.v
+arachne-pnr -d 8k -P cm81 -o hardware.asc -p hardware.pcf hardware.blif
+seed: 1
+device: 8k
+read_chipdb +/share/arachne-pnr/chipdb-8k.bin...
+  supported packages: bg121, bg121:4k, cb132, cb132:4k, cm121, cm121:4k, cm225, cm225:4k, cm81, cm81:4k, ct256, tq144:4k
+read_blif hardware.blif...
+prune...
+read_pcf hardware.pcf...
+hardware.pcf:43: warning: no port `pin_3' in top-level module `hardware', constraint ignored.
+hardware.pcf:44: warning: no port `pin_4' in top-level module `hardware', constraint ignored.
+hardware.pcf:45: warning: no port `pin_5' in top-level module `hardware', constraint ignored.
+hardware.pcf:46: warning: no port `pin_6' in top-level module `hardware', constraint ignored.
+hardware.pcf:47: warning: no port `pin_7' in top-level module `hardware', constraint ignored.
+hardware.pcf:48: warning: no port `pin_8' in top-level module `hardware', constraint ignored.
+hardware.pcf:49: warning: no port `pin_9' in top-level module `hardware', constraint ignored.
+hardware.pcf:50: warning: no port `pin_10' in top-level module `hardware', constraint ignored.
+hardware.pcf:51: warning: no port `pin_11' in top-level module `hardware', constraint ignored.
+hardware.pcf:52: warning: no port `pin_12' in top-level module `hardware', constraint ignored.
+hardware.pcf:53: warning: no port `pin_13' in top-level module `hardware', constraint ignored.
+hardware.pcf:56: warning: no port `pin_14' in top-level module `hardware', constraint ignored.
+hardware.pcf:57: warning: no port `pin_15' in top-level module `hardware', constraint ignored.
+hardware.pcf:58: warning: no port `pin_16' in top-level module `hardware', constraint ignored.
+hardware.pcf:59: warning: no port `pin_17' in top-level module `hardware', constraint ignored.
+hardware.pcf:60: warning: no port `pin_18' in top-level module `hardware', constraint ignored.
+hardware.pcf:61: warning: no port `pin_19' in top-level module `hardware', constraint ignored.
+hardware.pcf:62: warning: no port `pin_20' in top-level module `hardware', constraint ignored.
+hardware.pcf:63: warning: no port `pin_21' in top-level module `hardware', constraint ignored.
+hardware.pcf:64: warning: no port `pin_22' in top-level module `hardware', constraint ignored.
+hardware.pcf:65: warning: no port `pin_23' in top-level module `hardware', constraint ignored.
+hardware.pcf:66: warning: no port `pin_24' in top-level module `hardware', constraint ignored.
+hardware.pcf:77: warning: no port `pin_25' in top-level module `hardware', constraint ignored.
+hardware.pcf:78: warning: no port `pin_26' in top-level module `hardware', constraint ignored.
+hardware.pcf:79: warning: no port `pin_27' in top-level module `hardware', constraint ignored.
+hardware.pcf:80: warning: no port `pin_28' in top-level module `hardware', constraint ignored.
+hardware.pcf:81: warning: no port `pin_29' in top-level module `hardware', constraint ignored.
+hardware.pcf:82: warning: no port `pin_30' in top-level module `hardware', constraint ignored.
+hardware.pcf:83: warning: no port `pin_31' in top-level module `hardware', constraint ignored.
+instantiate_io...
+pack...
+
+After packing:
+IOs          13 / 63
+GBs          0 / 8
+  GB_IOs     0 / 8
+LCs          5682 / 7680
+  DFF        1500
+  CARRY      852
+  CARRY, DFF 157
+  DFF PASS   520
+  CARRY PASS 66
+BRAMs        20 / 32
+WARMBOOTs    0 / 1
+PLLs         0 / 1
+
+place_constraints...
+promote_globals...
+  promoted clk_16mhz$2, 1697 / 1697
+  promoted $abc$61453$n17, 555 / 555
+  promoted resetn, 332 / 332
+  promoted $abc$61453$n4752, 96 / 96
+  promoted soc.cpu.pcpi_div.start, 163 / 163
+  promoted soc.cpu.pcpi_mul.mul_waiting, 216 / 216
+  promoted $abc$61453$n4575, 73 / 74
+  promoted $abc$61453$n4757, 64 / 64
+  promoted 8 nets
+    3 sr/we
+    4 cen/wclke
+    1 clk
+  8 globals
+    3 sr/we
+    4 cen/wclke
+    1 clk
+realize_constants...
+  realized 1
+place...
+  initial wire length = 113487
+  at iteration #50: temp = 12.916, wire length = 98856
+  at iteration #100: temp = 7.73328, wire length = 74428
+  at iteration #150: temp = 3.96982, wire length = 50009
+  at iteration #200: temp = 1.74722, wire length = 35336
+  at iteration #250: temp = 0.0963064, wire length = 26256
+  at iteration #300: temp = 2.1477e-06, wire length = 25687
+  final wire length = 25669
+
+After placement:
+PIOs       18 / 63
+PLBs       876 / 960
+BRAMs      20 / 32
+
+  place time 58.27s
+route...
+  pass 1, 345 shared.
+  pass 2, 166 shared.
+  pass 3, 120 shared.
+  pass 4, 88 shared.
+  pass 5, 62 shared.
+  pass 6, 45 shared.
+  pass 7, 32 shared.
+  pass 8, 25 shared.
+  pass 9, 25 shared.
+  pass 10, 22 shared.
+  pass 11, 34 shared.
+  pass 12, 25 shared.
+  pass 13, 17 shared.
+  pass 14, 14 shared.
+  pass 15, 13 shared.
+  pass 16, 13 shared.
+  pass 17, 10 shared.
+  pass 18, 6 shared.
+  pass 19, 8 shared.
+  pass 20, 5 shared.
+  pass 21, 4 shared.
+  pass 22, 5 shared.
+  pass 23, 3 shared.
+  pass 24, 3 shared.
+  pass 25, 1 shared.
+  pass 26, 0 shared.
+
+After routing:
+span_4     13235 / 29696
+span_12    2230 / 5632
+
+  route time 57.42s
+write_txt hardware.asc...
+#icetime -d hx8k -c 12 -mtr hardware.rpt hardware.asc
+icetime -C /Users/ming/.apio/packages/toolchain-icestorm/share/icebox/chipdb-8k.txt  -d hx8k -c 12 -mtr hardware.rpt hardware.asc
+// Reading input .asc file..
+// Reading 8k chipdb file..
+// Creating timing netlist..
+// Timing estimate: 35.70 ns (28.01 MHz)
+// Checking 83.33 ns (12.00 MHz) clock constraint: PASSED.
+icepack hardware.asc hardware.bin
+#riscv32-unknown-elf-gcc -march=rv32imc -nostartfiles -Wl,-Bstatic,-T,sections.lds,--strip-debug,-Map=firmware.map,--cref  -ffreestanding -nostdlib -o firmware.elf start.S firmware.c
+riscv64-unknown-elf-gcc -march=rv32imc -mabi=ilp32 -nostartfiles -Wl,-Bstatic,-T,sections.lds,--strip-debug,-Map=firmware.map,--cref  -ffreestanding -nostdlib -o firmware.elf start.S firmware.c
+#riscv32-unknown-elf-objcopy -O binary firmware.elf /dev/stdout > firmware.bin
+riscv64-unknown-elf-objcopy -O binary firmware.elf firmware.bin
+tinyprog -p hardware.bin -u firmware.bin
+    Erasing:   0%|          | 0.00/135k [00:00<?, ?B/s]    Erasing:  24%|██▍       | 32.8k/135k [00:00<00:00, 213kB/s]    Erasing:  73%|███████▎  | 98.3k/135k [00:00<00:00, 226kB/s]    Erasing:  97%|█████████▋| 131k/135k [00:00<00:00, 233kB/s]     Erasing: 100%|██████████| 135k/135k [00:00<00:00, 236kB/s]
+    Writing:   0%|          | 0.00/135k [00:00<?, ?B/s]    Writing:   9%|▉         | 12.0k/135k [00:00<00:01, 118kB/s]    Writing:  17%|█▋        | 23.3k/135k [00:00<00:00, 116kB/s]    Writing:  25%|██▌       | 34.3k/135k [00:00<00:00, 114kB/s]    Writing:  34%|███▍      | 46.6k/135k [00:00<00:00, 116kB/s]    Writing:  43%|████▎     | 58.1k/135k [00:00<00:00, 115kB/s]    Writing:  51%|█████▏    | 69.4k/135k [00:00<00:00, 114kB/s]    Writing:  60%|█████▉    | 80.9k/135k [00:00<00:00, 114kB/s]    Writing:  68%|██████▊   | 92.4k/135k [00:00<00:00, 115kB/s]    Writing:  77%|███████▋  | 104k/135k [00:00<00:00, 116kB/s]     Writing:  86%|████████▌ | 116k/135k [00:01<00:00, 116kB/s]    Writing:  96%|█████████▌| 129k/135k [00:01<00:00, 118kB/s]    Writing: 100%|██████████| 135k/135k [00:01<00:00, 116kB/s]
+    Reading:   0%|          | 0.00/135k [00:00<?, ?B/s]    Reading:  15%|█▌        | 20.9k/135k [00:00<00:00, 208kB/s]    Reading:  31%|███▏      | 42.3k/135k [00:00<00:00, 209kB/s]    Reading:  49%|████▉     | 66.6k/135k [00:00<00:00, 218kB/s]    Reading:  66%|██████▌   | 89.2k/135k [00:00<00:00, 220kB/s]    Reading:  85%|████████▍ | 114k/135k [00:00<00:00, 228kB/s]     Reading: 100%|██████████| 135k/135k [00:00<00:00, 225kB/s]
+    Erasing:   0%|          | 0.00/496 [00:00<?, ?B/s]    Erasing: 100%|██████████| 496/496 [00:00<00:00, 4.77kB/s]    Erasing: 100%|██████████| 496/496 [00:00<00:00, 4.74kB/s]
+    Writing:   0%|          | 0.00/496 [00:00<?, ?B/s]    Writing: 100%|██████████| 496/496 [00:00<00:00, 117kB/s]
+    Reading:   0%|          | 0.00/496 [00:00<?, ?B/s]    Reading: 100%|██████████| 496/496 [00:00<00:00, 235kB/s]
+
+    TinyProg CLI
+    ------------
+    Using device id 1d50:6130
+    Only one board with active bootloader, using it.
+    Programming USB 20.2 with hardware.bin
+    Programming at addr 028000
+    Waking up SPI flash
+    135100 bytes to program
+    Success!
+    Programming USB 20.2 with firmware.bin
+    Programming at addr 050000
+    Waking up SPI flash
+    496 bytes to program
+    Success!
+

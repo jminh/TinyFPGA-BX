@@ -27,6 +27,28 @@ compile 32 bit toolchain takes
 287 min
 (make -j10) in ubuntu virtualbox.
 
+* make 
+  
+#+BEGIN_SRC sh
+make -n                                                                                                                                        (master *+x)
+yosys -ql hardware.log -p 'synth_ice40 -top hardware -blif hardware.blif' hardware.v spimemio.v simpleuart.v picosoc.v picorv32.v
+arachne-pnr -d 8k -P cm81 -o hardware.asc -p hardware.pcf hardware.blif
+#icetime -d hx8k -c 12 -mtr hardware.rpt hardware.asc
+icetime -C /Users/ming/.apio/packages/toolchain-icestorm/share/icebox/chipdb-8k.txt  -d hx8k -c 12 -mtr hardware.rpt hardware.asc
+icepack hardware.asc hardware.bin
+#riscv32-unknown-elf-gcc -march=rv32imc -nostartfiles -Wl,-Bstatic,-T,sections.lds,--strip-debug,-Map=firmware.map,--cref  -ffreestanding -nostdlib -o firmware.elf start.S firmware.c
+riscv64-unknown-elf-gcc -march=rv32imc -mabi=ilp32 -nostartfiles -Wl,-Bstatic,-T,sections.lds,--strip-debug,-Map=firmware.map,--cref  -ffreestanding -nostdlib -o firmware.elf start.S firmware.c
+#riscv32-unknown-elf-objcopy -O binary firmware.elf /dev/stdout > firmware.bin
+riscv64-unknown-elf-objcopy -O binary firmware.elf firmware.bin
+tinyprog -p hardware.bin -u firmware.bin
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+make 2>&1 | tee make.log
+
+see make.log
+#+END_EXAMPLE
+
 * misc
 
 #+BEGIN_EXAMPLE
